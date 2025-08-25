@@ -28,4 +28,9 @@
             <column name="ADDRESS" />
         </property>
     </class>
+    
+    <query name="allUser">
+		<![CDATA[ from UserDTO ]]>
+	</query>
+	
 </hibernate-mapping>

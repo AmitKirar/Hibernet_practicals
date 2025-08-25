@@ -1,18 +1,16 @@
-package com.rays.criteria;
+package com.rays.named;
 
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
 
 import com.rays.crud.UserDTO;
 
-public class TestCriteriaAnd {
+public class TestNamedQuerry {
 
 	public static void main(String[] args) {
 
@@ -20,15 +18,9 @@ public class TestCriteriaAnd {
 
 		Session session = sf.openSession();
 
-		Transaction tx = session.beginTransaction();
+		Query q = session.getNamedQuery("allUser");
 
-		Criteria criteria = session.createCriteria(UserDTO.class);
-
-		criteria.add(Restrictions.like("firstName", "vipin%"));
-
-		criteria.add(Restrictions.like("lastName", "phatan"));
-
-		List list = criteria.list();
+		List list = q.list();
 
 		Iterator it = list.iterator();
 
@@ -36,7 +28,7 @@ public class TestCriteriaAnd {
 
 			UserDTO dto = (UserDTO) it.next();
 
-			System.out.print(dto.getId());
+			System.out.println(dto.getId());
 			System.out.print("\t" + dto.getFirstName());
 			System.out.print("\t" + dto.getLastName());
 			System.out.print("\t" + dto.getLoginId());
@@ -45,9 +37,6 @@ public class TestCriteriaAnd {
 			System.out.println("\t" + dto.getAddress());
 
 		}
-
-		tx.commit();
-
 		session.close();
 
 	}

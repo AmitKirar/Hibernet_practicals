@@ -13,6 +13,11 @@
 		<property name="hbm2ddl.auto">update</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
+		
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		
+		<property name="hibernate.cache.use_query_cache">true</property>
 
 		<mapping resource="com/rays/crud/UserDTO.hbm.xml" />
 		
@@ -22,6 +27,8 @@
 		
 		<mapping resource="com/rays/onetoone/Address.hbm.xml"/>
 		<mapping resource="com/rays/onetoone/Employee.hbm.xml"/>
+		
+		<class-cache usage="read-only" class="com.rays.crud.UserDTO" />
 		
 	</session-factory>
 </hibernate-configuration>
